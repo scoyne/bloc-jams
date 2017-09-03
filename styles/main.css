@@ -57,7 +57,7 @@ body {
     color: rgb(233,50,117);
 }
 
-.links-container a:active {
+.links-container .navbar-line:active {
     background-color: white;
     color: rgb(233,50,117);
 }
