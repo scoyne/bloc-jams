@@ -11,7 +11,7 @@ var albumPicasso = {
         { title: 'Red', duration: '5:01' },
         { title: 'Pink', duration: '3:21'},
         { title: 'Magenta', duration: '2:15'}
-    ]
+     ]
 };
 
 // Example Album 2
@@ -22,33 +22,52 @@ var albumMarconi = {
     year: '1909',
     albumArtUrl: 'assets/images/album_covers/20.png',
     songs: [
-        { title: 'Hello, Operator?', duration: '1:01' },
-        { title: 'Ring, ring, ring', duration: '5:01' },
-        { title: 'Fits in your pocket', duration: '3:21'},
-        { title: 'Can you hear me now?', duration: '3:14' },
-        { title: 'Wrong phone number', duration: '2:15'}
+       { title: 'Hello, Operator?', duration: '1:01' },
+       { title: 'Ring, ring, ring', duration: '5:01' },
+       { title: 'Fits in your pocket', duration: '3:21'},
+       { title: 'Can you hear me now?', duration: '3:14' },
+       { title: 'Wrong phone number', duration: '2:15'}
+     ]
+ };
+
+// Example Album 3
+var albumVila = {
+    title: 'The House',
+    artist: 'Robert Vila',
+    label: 'EM',
+    year: '1920',
+    albumArtUrl: 'assets/images/album_covers/21.png',
+    songs: [
+        { title: 'Knock knock knocking on the door', duration: '11:01' },
+        { title: 'Walk walk walking on the floor', duration: '3:01' },
+        { title: 'Cooking in the kitchen', duration: '3:21'},
+        { title: 'Living room couch', duration: '3:30' },
+        { title: 'Sleeping in a bed', duration: '1:15'},
+        { title: 'Kitchen table coding', duration: '5:15'},
+        { title: 'Drafty window', duration: '2:15'},
+        { title: 'Epic guitar solo', duration: '30:15'}
     ]
 };
 
 var createSongRow = function(songNumber, songName, songLength) {
-     var template =
-        '<tr class="album-view-song-item">'
-      + '  <td class="song-item-number">' + songNumber + '</td>'
-      + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
-      + '</tr>'
-      ;
+    var template =
+       '<tr class="album-view-song-item">'
+     + '  <td class="song-item-number">' + songNumber + '</td>'
+     + '  <td class="song-item-title">' + songName + '</td>'
+     + '  <td class="song-item-duration">' + songLength + '</td>'
+     + '</tr>'
+     ;
 
-     return template;
- };
+    return template;
+};
 
- var setCurrentAlbum = function(album) {
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
+var setCurrentAlbum = function(album) {
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
@@ -61,6 +80,15 @@ var createSongRow = function(songNumber, songName, songLength) {
      }
  };
 
- window.onload = function() {
-     setCurrentAlbum(albumPicasso);
- };
+window.onload = function() {
+    setCurrentAlbum(albumPicasso);
+    var allAlbums = [albumPicasso, albumMarconi, albumVila];
+    var index = 1;
+    albumImage.addEventListener('click', function(event) {
+        setCurrentAlbum(allAlbums[index]);
+        index++
+        if(index == allAlbums.length) {
+          index = 0;
+        }
+    })
+};
