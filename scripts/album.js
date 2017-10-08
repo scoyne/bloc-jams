@@ -84,22 +84,32 @@ var currentlyPlayingSong = null;
 
 window.onload = function() {
 
+// assignment 13
+
     var findParentByClassName = function(element, targetClass) {
-        if (element) {
-            var currentParent = element.parentElement;
-            while (currentParent.className !== targetClass && currentParent.className !== null) {
+        var currentParent = element.parentElement;
+
+        if (currentParent) {
+            while (currentParent.className && currentParent.className != targetClass) {
                 currentParent = currentParent.parentElement;
             }
-            return currentParent;
+            if (currentParent.className === targetClass) {
+                return currentParent;
+            } else {
+                alert("No parent with that class name found.");
+            }
+        } else {
+            alert("No parent found.");
         }
-      };
+    };
+
 
     var getSongItem = function(element) {
         switch (element.className) {
             case 'album-song-button':
             case 'ion-play':
             case 'ion-pause':
-                return findParentByClassName(element, 'song-item-number');
+                return findParentByClassName(element, 'non-esistent-target-class');
             case 'album-view-song-item':
                 return element.querySelector('.song-item-number');
             case 'song-item-title':
