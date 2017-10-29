@@ -183,6 +183,15 @@ var updateSeekBarWhileSongPlays = function() {
 
  };
 
+ // assignment 21 start
+var setCurrentTimeInPlayerBar = function(currentTime) {
+     var currentTime = $(this).find('.current-time');
+     console.log(this);
+}
+
+
+ // assignment 21 end
+
  var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
