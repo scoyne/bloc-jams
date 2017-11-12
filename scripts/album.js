@@ -53,6 +53,7 @@ var createSongRow = function(songNumber, songName, songLength) {
             setSong(songNumber);
             currentSoundFile.play();
             updateSeekBarWhileSongPlays();
+            setCurrentTimeInPlayerBar();
             currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
 
             var $volumeFill = $('.volume .fill');
@@ -183,18 +184,35 @@ var updateSeekBarWhileSongPlays = function() {
 
  };
 
- // assignment 21 start
+ // assignment 21 part 1
 var setCurrentTimeInPlayerBar = function(currentTime) {
-     var currentTime = $(this).find('.current-time');
-     console.log(this);
+    var timer = buzz.toTimer(currentSoundFile.getTime());
+    $('.current-time').text(timer);
+};
+
+// assignment 21 part 2
+var setTotalTimeInPlayerBar = function(totalTime) {
+    var duration = buzz.toTimer(currentSoundFile.getDuration());
+    $('.total-time').text(duration);
+    console.log(duration);
+};
+
+// assignment 21 part 3
+var filterTimeCode = function(timeInSeconds) {
+
+    timer.parseFloat();
+    duration.parseFloat();
+
+    currentTime = Math.floor(timer).toString();
+    totalTimen = Math.floor(duration).toString();
+
+
 }
 
-
- // assignment 21 end
-
- var trackIndex = function(album, song) {
+var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 };
+
 
 var nextSong = function() {
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
@@ -210,6 +228,7 @@ var nextSong = function() {
      currentSoundFile.play();
      updateSeekBarWhileSongPlays()
      updatePlayerBarSong();
+     setuserInPlayerBar();
 
      var $nextSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
      var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
@@ -247,6 +266,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + ' - ' + currentAlbum.title);
     $playerBarButton.html(playerBarPauseButton);
+    setTotalTimeInPlayerBar();
 };
 
 var togglePlayFromPlayerBar = function() {
